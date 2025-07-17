@@ -1,0 +1,574 @@
+
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Programming",
+      "description": "Programming related books",
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Science Fiction",
+      "description": "Science Fiction related books",
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "name": "Mathematics",
+      "description": "Mathematics related books",
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+      "name": "History",
+      "description": "History related books",
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+      "name": "Philosophy",
+      "description": "Philosophy related books",
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 1,
+    "fields": {
+      "first_name": "Author1",
+      "last_name": "Surname1",
+      "biography": "Biography of Author1",
+      "birth_date": "1970-01-01",
+      "death_date": null,
+      "photo": null,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 2,
+    "fields": {
+      "first_name": "Author2",
+      "last_name": "Surname2",
+      "biography": "Biography of Author2",
+      "birth_date": "1970-01-01",
+      "death_date": null,
+      "photo": null,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 3,
+    "fields": {
+      "first_name": "Author3",
+      "last_name": "Surname3",
+      "biography": "Biography of Author3",
+      "birth_date": "1970-01-01",
+      "death_date": null,
+      "photo": null,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 4,
+    "fields": {
+      "first_name": "Author4",
+      "last_name": "Surname4",
+      "biography": "Biography of Author4",
+      "birth_date": "1970-01-01",
+      "death_date": null,
+      "photo": null,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 5,
+    "fields": {
+      "first_name": "Author5",
+      "last_name": "Surname5",
+      "biography": "Biography of Author5",
+      "birth_date": "1970-01-01",
+      "death_date": null,
+      "photo": null,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 6,
+    "fields": {
+      "first_name": "Author6",
+      "last_name": "Surname6",
+      "biography": "Biography of Author6",
+      "birth_date": "1970-01-01",
+      "death_date": null,
+      "photo": null,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 7,
+    "fields": {
+      "first_name": "Author7",
+      "last_name": "Surname7",
+      "biography": "Biography of Author7",
+      "birth_date": "1970-01-01",
+      "death_date": null,
+      "photo": null,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 8,
+    "fields": {
+      "first_name": "Author8",
+      "last_name": "Surname8",
+      "biography": "Biography of Author8",
+      "birth_date": "1970-01-01",
+      "death_date": null,
+      "photo": null,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 9,
+    "fields": {
+      "first_name": "Author9",
+      "last_name": "Surname9",
+      "biography": "Biography of Author9",
+      "birth_date": "1970-01-01",
+      "death_date": null,
+      "photo": null,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 10,
+    "fields": {
+      "first_name": "Author10",
+      "last_name": "Surname10",
+      "biography": "Biography of Author10",
+      "birth_date": "1970-01-01",
+      "death_date": null,
+      "photo": null,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 1,
+    "fields": {
+      "title": "Book Title 1",
+      "subtitle": "Subtitle 1",
+      "isbn": "97800000000001",
+      "description": "Description of book 1",
+      "category": 1,
+      "publication_date": "2022-01-01",
+      "publisher": "Publisher 1",
+      "cover_image": null,
+      "author": 1,
+      "total_copies": 5,
+      "available_copies": 2,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 2,
+    "fields": {
+      "title": "Book Title 2",
+      "subtitle": "Subtitle 2",
+      "isbn": "97800000000002",
+      "description": "Description of book 2",
+      "category": 2,
+      "publication_date": "2022-01-01",
+      "publisher": "Publisher 2",
+      "cover_image": null,
+      "author": 2,
+      "total_copies": 6,
+      "available_copies": 3,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 3,
+    "fields": {
+      "title": "Book Title 3",
+      "subtitle": "Subtitle 3",
+      "isbn": "97800000000003",
+      "description": "Description of book 3",
+      "category": 3,
+      "publication_date": "2022-01-01",
+      "publisher": "Publisher 3",
+      "cover_image": null,
+      "author": 3,
+      "total_copies": 7,
+      "available_copies": 4,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 4,
+    "fields": {
+      "title": "Book Title 4",
+      "subtitle": "Subtitle 4",
+      "isbn": "97800000000004",
+      "description": "Description of book 4",
+      "category": 4,
+      "publication_date": "2022-01-01",
+      "publisher": "Publisher 4",
+      "cover_image": null,
+      "author": 4,
+      "total_copies": 5,
+      "available_copies": 2,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 5,
+    "fields": {
+      "title": "Book Title 5",
+      "subtitle": "Subtitle 5",
+      "isbn": "97800000000005",
+      "description": "Description of book 5",
+      "category": 5,
+      "publication_date": "2022-01-01",
+      "publisher": "Publisher 5",
+      "cover_image": null,
+      "author": 5,
+      "total_copies": 6,
+      "available_copies": 3,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 6,
+    "fields": {
+      "title": "Book Title 6",
+      "subtitle": "Subtitle 6",
+      "isbn": "97800000000006",
+      "description": "Description of book 6",
+      "category": 1,
+      "publication_date": "2022-01-01",
+      "publisher": "Publisher 6",
+      "cover_image": null,
+      "author": 6,
+      "total_copies": 7,
+      "available_copies": 4,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 7,
+    "fields": {
+      "title": "Book Title 7",
+      "subtitle": "Subtitle 7",
+      "isbn": "97800000000007",
+      "description": "Description of book 7",
+      "category": 2,
+      "publication_date": "2022-01-01",
+      "publisher": "Publisher 7",
+      "cover_image": null,
+      "author": 7,
+      "total_copies": 5,
+      "available_copies": 2,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 8,
+    "fields": {
+      "title": "Book Title 8",
+      "subtitle": "Subtitle 8",
+      "isbn": "97800000000008",
+      "description": "Description of book 8",
+      "category": 3,
+      "publication_date": "2022-01-01",
+      "publisher": "Publisher 8",
+      "cover_image": null,
+      "author": 8,
+      "total_copies": 6,
+      "available_copies": 3,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 9,
+    "fields": {
+      "title": "Book Title 9",
+      "subtitle": "Subtitle 9",
+      "isbn": "97800000000009",
+      "description": "Description of book 9",
+      "category": 4,
+      "publication_date": "2022-01-01",
+      "publisher": "Publisher 9",
+      "cover_image": null,
+      "author": 9,
+      "total_copies": 7,
+      "available_copies": 4,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 10,
+    "fields": {
+      "title": "Book Title 10",
+      "subtitle": "Subtitle 10",
+      "isbn": "97800000000010",
+      "description": "Description of book 10",
+      "category": 5,
+      "publication_date": "2022-01-01",
+      "publisher": "Publisher 10",
+      "cover_image": null,
+      "author": 10,
+      "total_copies": 5,
+      "available_copies": 2,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 11,
+    "fields": {
+      "title": "Book Title 11",
+      "subtitle": "Subtitle 11",
+      "isbn": "97800000000011",
+      "description": "Description of book 11",
+      "category": 1,
+      "publication_date": "2022-01-01",
+      "publisher": "Publisher 11",
+      "cover_image": null,
+      "author": 1,
+      "total_copies": 6,
+      "available_copies": 3,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 12,
+    "fields": {
+      "title": "Book Title 12",
+      "subtitle": "Subtitle 12",
+      "isbn": "97800000000012",
+      "description": "Description of book 12",
+      "category": 2,
+      "publication_date": "2022-01-01",
+      "publisher": "Publisher 12",
+      "cover_image": null,
+      "author": 2,
+      "total_copies": 7,
+      "available_copies": 4,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 13,
+    "fields": {
+      "title": "Book Title 13",
+      "subtitle": "Subtitle 13",
+      "isbn": "97800000000013",
+      "description": "Description of book 13",
+      "category": 3,
+      "publication_date": "2022-01-01",
+      "publisher": "Publisher 13",
+      "cover_image": null,
+      "author": 3,
+      "total_copies": 5,
+      "available_copies": 2,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 14,
+    "fields": {
+      "title": "Book Title 14",
+      "subtitle": "Subtitle 14",
+      "isbn": "97800000000014",
+      "description": "Description of book 14",
+      "category": 4,
+      "publication_date": "2022-01-01",
+      "publisher": "Publisher 14",
+      "cover_image": null,
+      "author": 4,
+      "total_copies": 6,
+      "available_copies": 3,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 15,
+    "fields": {
+      "title": "Book Title 15",
+      "subtitle": "Subtitle 15",
+      "isbn": "97800000000015",
+      "description": "Description of book 15",
+      "category": 5,
+      "publication_date": "2022-01-01",
+      "publisher": "Publisher 15",
+      "cover_image": null,
+      "author": 5,
+      "total_copies": 7,
+      "available_copies": 4,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 16,
+    "fields": {
+      "title": "Book Title 16",
+      "subtitle": "Subtitle 16",
+      "isbn": "97800000000016",
+      "description": "Description of book 16",
+      "category": 1,
+      "publication_date": "2022-01-01",
+      "publisher": "Publisher 16",
+      "cover_image": null,
+      "author": 6,
+      "total_copies": 5,
+      "available_copies": 2,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 17,
+    "fields": {
+      "title": "Book Title 17",
+      "subtitle": "Subtitle 17",
+      "isbn": "97800000000017",
+      "description": "Description of book 17",
+      "category": 2,
+      "publication_date": "2022-01-01",
+      "publisher": "Publisher 17",
+      "cover_image": null,
+      "author": 7,
+      "total_copies": 6,
+      "available_copies": 3,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 18,
+    "fields": {
+      "title": "Book Title 18",
+      "subtitle": "Subtitle 18",
+      "isbn": "97800000000018",
+      "description": "Description of book 18",
+      "category": 3,
+      "publication_date": "2022-01-01",
+      "publisher": "Publisher 18",
+      "cover_image": null,
+      "author": 8,
+      "total_copies": 7,
+      "available_copies": 4,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 19,
+    "fields": {
+      "title": "Book Title 19",
+      "subtitle": "Subtitle 19",
+      "isbn": "97800000000019",
+      "description": "Description of book 19",
+      "category": 4,
+      "publication_date": "2022-01-01",
+      "publisher": "Publisher 19",
+      "cover_image": null,
+      "author": 9,
+      "total_copies": 5,
+      "available_copies": 2,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 20,
+    "fields": {
+      "title": "Book Title 20",
+      "subtitle": "Subtitle 20",
+      "isbn": "97800000000020",
+      "description": "Description of book 20",
+      "category": 5,
+      "publication_date": "2022-01-01",
+      "publisher": "Publisher 20",
+      "cover_image": null,
+      "author": 10,
+      "total_copies": 6,
+      "available_copies": 3,
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  }
+]
+
