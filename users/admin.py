@@ -1,6 +1,13 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from users.models import User
+from users.models import User, Member
+
+
+class MemberInline(admin.StackedInline):
+    model = Member
+    can_delete = False
+    verbose_name = "Additional Personal Info"
+    fk_name = "user"
 
 
 class CustomUserAdmin(UserAdmin):
@@ -41,6 +48,12 @@ class CustomUserAdmin(UserAdmin):
 
     search_fields = ("email",)
     ordering = ("email",)
+    inlines = (MemberInline,)
+
+    def get_inline_instances(self, request, obj=None):
+        if not obj:
+            return []
+        return super().get_inline_instances(request, obj)
 
 
 admin.site.register(User, CustomUserAdmin)
