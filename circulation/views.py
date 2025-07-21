@@ -1,4 +1,5 @@
 from rest_framework.response import Response
+from rest_framework.decorators import action
 from rest_framework import status
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.exceptions import ValidationError
@@ -8,56 +9,18 @@ from django.utils import timezone
 from datetime import timedelta
 
 from rest_framework import permissions
-from circulation.permissions import IsLibrarian, IsMember
+from circulation.permissions import IsLibrarian, IsMember, IsOwnerOrLibrarian
 from circulation.models import BorrowRecord
-from circulation.serializers import (
-    BorrowSerializer,
-    ReturnSerializer,
-    BorrowRecordSerializer,
-)
-
-
-class BorrowViewSet(ModelViewSet):
-    queryset = BorrowRecord.objects.all()
-    serializer_class = BorrowSerializer
-
-    def perform_create(self, serializer):
-        book = serializer.validated_data["book"]
-        if book.available_copies < 1:
-            raise ValidationError("This book is not available for borrowing.")
-
-        book.available_copies -= 1
-        book.save()
-
-        due_date = timezone.now().date() + timedelta(days=14)
-        serializer.save(due_date=due_date)
-
-
-class ReturnBookView(APIView):
-    def post(self, request, *args, **kwargs):
-        serializer = ReturnSerializer(data=request.data)
-        if serializer.is_valid():
-            borrow = serializer.save()
-            return Response(
-                {"detail": "Book returned successfully."}, status=status.HTTP_200_OK
-            )
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+from circulation.serializers import BorrowRecordSerializer
 
 
 class BorrowRecordViewSet(ModelViewSet):
-    serializer_class = BorrowRecordSerializer
-    # permission_classes = [IsAuthenticated]
-
-    # def get_permissions(self):
-    #     if self.action in ["update", "partial_update", "destroy"]:
-    #         return [IsLibrarian()]
-    #     return [IsMember()]
-    def get_permissions(self):
-        if self.action in ["create"]:
-            return [IsMember()]
-        elif self.action in ["update", "partial_update", "destroy"]:
-            return [IsLibrarian()]
-        return [permissions.IsAuthenticated()]
+    """
+    ViewSet for BorrowRecord model.
+    Supports:
+    - listing, retrieving, creating borrow records,
+    - and a custom 'return' action to mark a book as returned.
+    """
 
     def get_queryset(self):
         user = self.request.user
@@ -65,5 +28,67 @@ class BorrowRecordViewSet(ModelViewSet):
             return BorrowRecord.objects.all()
         return BorrowRecord.objects.filter(member=user.member_profile)
 
-    def perform_create(self, serializer):
-        serializer.save(member=self.request.user.member_profile)
+    serializer_class = BorrowRecordSerializer
+
+    @action(detail=True, methods=["post"], url_path="return")
+    def return_book(self, request, pk=None):
+        """
+        Custom action to return a borrowed book:
+        - Sets return_date to today
+        - Marks is_returned = True
+        - Increments the book's available_copies
+        - Calculates fine if overdue and creates a Fine record
+        """
+
+        try:
+            # Retrieve the BorrowRecord instance (borrow)
+            borrow = self.get_object()
+
+            # Check if already returned
+            if borrow.is_returned:
+                return Response(
+                    {"message": "Book is already returned."},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            # Set return_date and mark returned
+            borrow.return_date = timezone.now().date()
+            borrow.is_returned = True
+            borrow.save()
+
+            # Increase the available copies of the book
+            book = borrow.book
+            book.available_copies += 1
+            book.save()
+
+            # Fine calculation if returned late
+            fine_amount = 0
+            if borrow.return_date > borrow.due_date:
+                days_late = (borrow.return_date - borrow.due_date).days
+                fine_amount = days_late * 10  # e.g., 10 taka per day late
+
+                # Create Fine record
+                Fine.objects.create(
+                    borrow_record=borrow,
+                    amount=fine_amount,
+                )
+
+            # Return success response with details
+            return Response(
+                {
+                    "id": borrow.id,
+                    "message": "Book returned successfully.",
+                    "return_date": str(borrow.return_date),
+                    "is_returned": borrow.is_returned,
+                    "fine_amount": fine_amount,
+                },
+                status=status.HTTP_200_OK,
+            )
+
+        except BorrowRecord.DoesNotExist:
+            # This should rarely happen because get_object() raises 404 automatically,
+            # but included for completeness.
+            return Response(
+                {"error": "Borrow record not found."},
+                status=status.HTTP_404_NOT_FOUND,
+            )
