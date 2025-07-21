@@ -1,5 +1,4 @@
 from rest_framework.response import Response
-from rest_framework import status
 from rest_framework.decorators import action
 from django.db.models import Count, Q
 from rest_framework.viewsets import ModelViewSet
@@ -9,7 +8,11 @@ from django_filters.rest_framework import DjangoFilterBackend
 from catalog.filters import BookFilter
 from catalog.paginations import DefaultPagination
 from catalog.models import Author, Category, Book
-from catalog.serializers import AuthorSerializer, CategorySerializer, BookSerializer
+from catalog.serializers import (
+    AuthorSerializer,
+    CategorySerializer,
+    BookSerializer,
+)
 
 from circulation.permissions import IsLibrarianOrReadOnly
 

@@ -10,11 +10,9 @@ router = routers.DefaultRouter()  # ----> Api Root a error day na...link day...
 router.register("authors", AuthorViewSet, basename="authors")
 router.register("categories", CategoryViewSet, basename="categories")
 router.register("books", BookViewSet, basename="books")
-# router.register("borrow", BorrowViewSet, basename="borrow")
 router.register("borrow-records", BorrowRecordViewSet, basename="borrow-records")
 
 
 urlpatterns = [
     path("", include(router.urls)),
-    # path("return/", ReturnBookViewSet.as_view(), name="return-book"),
 ]
