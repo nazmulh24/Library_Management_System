@@ -6,6 +6,10 @@ from datetime import timedelta, time, datetime
 from django.utils import timezone
 
 
+def default_due_date():
+    return timezone.now().date() + timedelta(days=14)
+
+
 class BorrowRecord(models.Model):
     member = models.ForeignKey(
         Member,
@@ -18,7 +22,7 @@ class BorrowRecord(models.Model):
         related_name="borrow_records",
     )
     borrow_date = models.DateField(auto_now_add=True)
-    due_date = models.DateField()
+    due_date = models.DateField(default=default_due_date)
     return_date = models.DateField(blank=True, null=True)
     is_returned = models.BooleanField(default=False)
 

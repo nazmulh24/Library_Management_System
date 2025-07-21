@@ -11,21 +11,28 @@ from catalog.paginations import DefaultPagination
 from catalog.models import Author, Category, Book
 from catalog.serializers import AuthorSerializer, CategorySerializer, BookSerializer
 
+from circulation.permissions import IsLibrarianOrReadOnly
+
 
 class AuthorViewSet(ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
+
+    permission_classes = [IsLibrarianOrReadOnly]
 
 
 class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
+    permission_classes = [IsLibrarianOrReadOnly]
+
 
 class BookViewSet(ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
+    permission_classes = [IsLibrarianOrReadOnly]
     pagination_class = DefaultPagination
 
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]

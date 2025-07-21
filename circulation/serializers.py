@@ -16,7 +16,6 @@ class BorrowSerializer(serializers.ModelSerializer):
             "member",
             "book",
             "borrow_date",
-            "due_date",
             "is_returned",
         ]
 
@@ -69,3 +68,48 @@ class ReturnSerializer(serializers.Serializer):
             )
 
         return borrow
+
+
+class BorrowRecordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BorrowRecord
+        fields = "__all__"
+        read_only_fields = [
+            "id",
+            "member",
+            "borrow_date",
+            "due_date",
+            "is_returned",
+            "return_date",
+        ]
+
+    def validate(self, data):
+        book = data.get("book")
+        if book and book.available_copies < 1:
+            raise serializers.ValidationError(
+                "This book is not available for borrowing."
+            )
+        return data
+
+    def create(self, validated_data):
+        request = self.context.get("request")
+        user = request.user
+        member = getattr(user, "member_profile", None)
+
+        if not member:
+            raise serializers.ValidationError("Only members can borrow books.")
+
+        book = validated_data.get("book")
+        if book.available_copies < 1:
+            raise serializers.ValidationError("This book is not available.")
+
+        # --> Decrease available copies
+        book.available_copies -= 1
+        book.save()
+
+        # --> Create record
+        borrow_record = BorrowRecord.objects.create(
+            member=member,
+            book=book,
+        )
+        return borrow_record

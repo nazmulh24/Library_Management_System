@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from circulation.models import BorrowRecord
+
+admin.site.register(BorrowRecord)
