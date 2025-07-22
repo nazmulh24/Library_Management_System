@@ -16,6 +16,7 @@ class AuthorSerializer(serializers.ModelSerializer):
             "biography",
             "birth_date",
             "death_date",
+            "photo",
         ]
 
     def get_full_name(self, obj):
