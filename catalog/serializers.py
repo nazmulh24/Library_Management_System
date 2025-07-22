@@ -41,6 +41,7 @@ class BookSerializer(serializers.ModelSerializer):
             "subtitle",
             "isbn",
             "description",
+            "cover_image",
             "category",
             "category_name",
             "publication_date",
