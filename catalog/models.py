@@ -1,4 +1,5 @@
 from django.db import models
+from catalog.validators import validate_file_size
 
 
 class Author(models.Model):
@@ -7,7 +8,12 @@ class Author(models.Model):
     biography = models.TextField(blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True)
     death_date = models.DateField(blank=True, null=True)
-    photo = models.ImageField(upload_to="authors/photos/", blank=True, null=True)
+    photo = models.ImageField(
+        upload_to="authors/photos/",
+        validators=[validate_file_size],
+        blank=True,
+        null=True,
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -38,7 +44,12 @@ class Book(models.Model):
     )
     publication_date = models.DateField(blank=True, null=True)
     publisher = models.CharField(max_length=150, blank=True, null=True)
-    cover_image = models.ImageField(upload_to="books/covers/", blank=True, null=True)
+    cover_image = models.ImageField(
+        upload_to="books/covers/",
+        validators=[validate_file_size],
+        blank=True,
+        null=True,
+    )
     author = models.ForeignKey(
         Author,
         on_delete=models.SET_NULL,
