@@ -1,14 +1,8 @@
 from rest_framework import serializers
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from rest_framework import status, viewsets
 
-from circulation.models import BorrowRecord, Fine
-from catalog.models import Book
-from users.models import Member
+from circulation.models import BorrowRecord
 
-from datetime import timedelta
-from django.utils import timezone
+from datetime import date
 
 
 class BorrowRecordSerializer(serializers.ModelSerializer):
@@ -37,9 +31,15 @@ class BorrowRecordSerializer(serializers.ModelSerializer):
         ]
 
     def get_fine_amount(self, obj):
-        if hasattr(obj, "fine") and obj.fine:
-            return obj.fine.amount
-        return 0.0
+        if obj.is_returned:
+            return 0
+
+        today = date.today()
+        if obj.due_date and today > obj.due_date:
+            delta = (today - obj.due_date).days
+            fine_per_day = 10  # ---> example: 10 BDT per day
+            return delta * fine_per_day
+        return 0
 
     def validate(self, data):
         book = data.get("book")
@@ -71,16 +71,3 @@ class BorrowRecordSerializer(serializers.ModelSerializer):
             book=book,
         )
         return borrow_record
-
-
-class FineSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Fine
-        fields = [
-            "id",
-            "borrow_record",
-            "amount",
-            "paid",
-            "paid_at",
-        ]
-        read_only_fields = ["borrow_record", "amount", "paid_at"]

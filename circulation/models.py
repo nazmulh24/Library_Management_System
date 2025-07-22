@@ -37,38 +37,6 @@ class BorrowRecord(models.Model):
         ordering = ["-borrow_date"]
 
 
-class Reservation(models.Model):
-    member = models.ForeignKey(
-        Member,
-        on_delete=models.CASCADE,
-        related_name="reservations",
-    )
-    book = models.ForeignKey(
-        Book,
-        on_delete=models.CASCADE,
-        related_name="reservations",
-    )
-    reserved_at = models.DateTimeField(auto_now_add=True)
-    expires_at = models.DateTimeField(blank=True, null=True)
-    is_active = models.BooleanField(default=True)
-
-    def save(self, *args, **kwargs):
-        if not self.expires_at:
-            reservation_day = timezone.localdate() + timedelta(days=7)
-            expiration_datetime = datetime.combine(
-                reservation_day, time(hour=23, minute=59)
-            )
-            self.expires_at = timezone.make_aware(expiration_datetime)
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return f"{self.member} reserved {self.book}"
-
-    class Meta:
-        unique_together = ("member", "book")
-        ordering = ["-reserved_at"]
-
-
 class Fine(models.Model):
     borrow_record = models.OneToOneField(
         BorrowRecord,

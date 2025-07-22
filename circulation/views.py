@@ -2,15 +2,12 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework import status
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.exceptions import ValidationError
-from rest_framework.views import APIView
-
 from django.utils import timezone
-from datetime import timedelta
+from rest_framework.permissions import IsAuthenticated
 
 from rest_framework import permissions
 from circulation.permissions import IsLibrarian, IsMember, IsOwnerOrLibrarian
-from circulation.models import BorrowRecord
+from circulation.models import BorrowRecord, Fine
 from circulation.serializers import BorrowRecordSerializer
 
 
@@ -62,16 +59,12 @@ class BorrowRecordViewSet(ModelViewSet):
             book.save()
 
             # Fine calculation if returned late
-            fine_amount = 0
             if borrow.return_date > borrow.due_date:
                 days_late = (borrow.return_date - borrow.due_date).days
-                fine_amount = days_late * 10  # e.g., 10 taka per day late
-
-                # Create Fine record
-                Fine.objects.create(
-                    borrow_record=borrow,
-                    amount=fine_amount,
-                )
+                fine_amount = days_late * 10
+                Fine.objects.create(borrow_record=borrow, amount=fine_amount)
+            else:
+                fine_amount = 0
 
             # Return success response with details
             return Response(
@@ -86,8 +79,6 @@ class BorrowRecordViewSet(ModelViewSet):
             )
 
         except BorrowRecord.DoesNotExist:
-            # This should rarely happen because get_object() raises 404 automatically,
-            # but included for completeness.
             return Response(
                 {"error": "Borrow record not found."},
                 status=status.HTTP_404_NOT_FOUND,
