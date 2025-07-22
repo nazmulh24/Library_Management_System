@@ -4,9 +4,7 @@ from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.viewsets import ModelViewSet
 from django.utils import timezone
-from rest_framework.permissions import IsAuthenticated
 
-from rest_framework import permissions
 from circulation.permissions import IsLibrarian, IsMember
 from circulation.models import BorrowRecord
 from circulation.serializers import BorrowRecordSerializer
@@ -28,6 +26,8 @@ class BorrowRecordViewSet(ModelViewSet):
         return BorrowRecord.objects.filter(member=user.member_profile)
 
     serializer_class = BorrowRecordSerializer
+
+    permission_classes = [IsMember | IsLibrarian]
 
     @swagger_auto_schema(operation_summary="Retrieve a list of borrow records")
     def list(self, request, *args, **kwargs):
