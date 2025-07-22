@@ -19,3 +19,27 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+================================================================================
+
+Library Management System - Professional REST API
+A comprehensive library management solution built with Django REST Framework
+
+Project Repository: https://github.com/nazmulh24/Library_Management_System
+Author: Nazmul Hossain (https://github.com/nazmulh24)
+Email: snazmulhossains24@gmail.com
+
+This project includes the following key technologies and components:
+- Django 5.2.4 with REST Framework 3.16.0
+- JWT Authentication with Djoser 2.3.3
+- PostgreSQL database integration
+- Cloudinary media storage
+- Swagger/OpenAPI documentation
+- Vercel deployment configuration
+- Comprehensive test suite
+- Production-ready security features
+
+For support, contributions, or questions, please visit the project repository
+or contact the maintainer directly.
+
+================================================================================
