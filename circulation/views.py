@@ -10,14 +10,15 @@ from rest_framework import permissions
 from circulation.permissions import IsLibrarian, IsMember
 from circulation.models import BorrowRecord
 from circulation.serializers import BorrowRecordSerializer
+from drf_yasg.utils import swagger_auto_schema
 
 
 class BorrowRecordViewSet(ModelViewSet):
     """
-    ViewSet for BorrowRecord model.
-    Supports:
-    - listing, retrieving, creating borrow records,
-    - and a custom 'return' action to mark a book as returned.
+    Manage book borrowing records with CRUD operations
+    - Librarians: Full access to all records
+    - Members: Access only to their own borrow records
+    - Custom endpoint: return/ (mark book as returned, calculate fines)
     """
 
     def get_queryset(self):
@@ -28,6 +29,30 @@ class BorrowRecordViewSet(ModelViewSet):
 
     serializer_class = BorrowRecordSerializer
 
+    @swagger_auto_schema(operation_summary="Retrieve a list of borrow records")
+    def list(self, request, *args, **kwargs):
+        """Retrieve borrow records based on user permissions"""
+        return super().list(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Create a new borrow record",
+        operation_description="Create a new book borrowing record",
+        request_body=BorrowRecordSerializer,
+        responses={201: BorrowRecordSerializer, 400: "Bad Request"},
+    )
+    def create(self, request, *args, **kwargs):
+        """Create a new borrow record"""
+        return super().create(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Return a borrowed book",
+        operation_description="Mark a book as returned, update available copies, and calculate fines if overdue",
+        responses={
+            200: "Book returned successfully",
+            400: "Bad Request",
+            404: "Not Found",
+        },
+    )
     @action(detail=True, methods=["post"], url_path="return")
     def return_book(self, request, pk=None):
         """
