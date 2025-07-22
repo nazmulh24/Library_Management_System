@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from users.managers import CustomUserManager
 
+from catalog.validators import validate_file_size
+from cloudinary.models import CloudinaryField
+
 
 class User(AbstractUser):
     username = None
@@ -25,8 +28,11 @@ class Member(models.Model):
     membership_date = models.DateField(auto_now_add=True)
     address = models.TextField(blank=True, null=True)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
-    profile_picture = models.ImageField(
-        upload_to="members/profile_pics", blank=True, null=True
+    profile_picture = CloudinaryField(
+        "profile_picture",
+        blank=True,
+        null=True,
+        validators=[validate_file_size],
     )
 
     def __str__(self):

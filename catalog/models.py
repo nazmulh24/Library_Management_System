@@ -1,6 +1,8 @@
 from django.db import models
 from catalog.validators import validate_file_size
 
+from cloudinary.models import CloudinaryField
+
 
 class Author(models.Model):
     first_name = models.CharField(max_length=50)
@@ -8,11 +10,11 @@ class Author(models.Model):
     biography = models.TextField(blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True)
     death_date = models.DateField(blank=True, null=True)
-    photo = models.ImageField(
-        upload_to="authors/photos/",
-        validators=[validate_file_size],
+    photo = CloudinaryField(
+        "photo",
         blank=True,
         null=True,
+        validators=[validate_file_size],
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -44,11 +46,11 @@ class Book(models.Model):
     )
     publication_date = models.DateField(blank=True, null=True)
     publisher = models.CharField(max_length=150, blank=True, null=True)
-    cover_image = models.ImageField(
-        upload_to="books/covers/",
-        validators=[validate_file_size],
+    cover_image = CloudinaryField(
+        "cover_image",
         blank=True,
         null=True,
+        validators=[validate_file_size],
     )
     author = models.ForeignKey(
         Author,

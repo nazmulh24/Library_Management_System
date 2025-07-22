@@ -5,6 +5,7 @@ from catalog.models import Author, Category, Book
 
 class AuthorSerializer(serializers.ModelSerializer):
     full_name = serializers.SerializerMethodField(method_name="get_full_name")
+    photo = serializers.ImageField()
 
     class Meta:
         model = Author
@@ -32,6 +33,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class BookSerializer(serializers.ModelSerializer):
     author_name = serializers.SerializerMethodField(method_name="get_author_name")
     category_name = serializers.SerializerMethodField(method_name="get_category_name")
+    cover_image = serializers.ImageField()
 
     class Meta:
         model = Book
