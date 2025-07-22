@@ -14,9 +14,6 @@ router.register("borrow-records", BorrowRecordViewSet, basename="borrow-records"
 
 urlpatterns = [
     path("", include(router.urls)),
-<<<<<<< HEAD
-=======
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.jwt")),
->>>>>>> old-state
 ]
