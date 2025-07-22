@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     "api",
     "catalog",
     "circulation",
-    "community",
     "users",
 ]
 

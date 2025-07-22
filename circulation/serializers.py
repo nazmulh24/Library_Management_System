@@ -2,7 +2,12 @@ from rest_framework import serializers
 
 from circulation.models import BorrowRecord
 
+<<<<<<< HEAD
 from datetime import date
+=======
+from datetime import timedelta, date
+from django.utils import timezone
+>>>>>>> old-state
 
 
 class BorrowRecordSerializer(serializers.ModelSerializer):
@@ -31,6 +36,7 @@ class BorrowRecordSerializer(serializers.ModelSerializer):
         ]
 
     def get_fine_amount(self, obj):
+<<<<<<< HEAD
         if obj.is_returned:
             return 0
 
@@ -40,6 +46,11 @@ class BorrowRecordSerializer(serializers.ModelSerializer):
             fine_per_day = 10  # ---> example: 10 BDT per day
             return delta * fine_per_day
         return 0
+=======
+        if hasattr(obj, "fine") and obj.fine:
+            return obj.fine.amount
+        return 0.0
+>>>>>>> old-state
 
     def validate(self, data):
         book = data.get("book")
